@@ -425,9 +425,9 @@
     </div>
   </div>
   <div class="header-right">
-    <div class="city-pill interlaken" onclick="scrollToCity('interlaken')">Interlaken</div>
-    <div class="city-pill montreux"   onclick="scrollToCity('montreux')">Montreux</div>
-    <div class="city-pill zurich"     onclick="scrollToCity('zurich')">Zurich</div>
+    <div class="city-pill interlaken" id="pill-interlaken">Interlaken</div>
+    <div class="city-pill montreux"   id="pill-montreux">Montreux</div>
+    <div class="city-pill zurich"     id="pill-zurich">Zurich</div>
   </div>
 </header>
 
@@ -453,8 +453,8 @@
         <input class="form-input" id="inp-dist"  placeholder="Dist. to station" type="text">
       </div>
       <input class="form-input full" id="inp-note" placeholder="Notes (optional)" type="text" style="margin-bottom:8px;width:100%">
-      <button class="add-btn" onclick="addHotel()">Add hotel</button>
-      <button class="ai-btn" id="ai-btn" onclick="aiPopulate()">
+      <button class="add-btn" id="add-btn">Add hotel</button>
+      <button class="ai-btn" id="ai-btn">
         <span id="ai-spinner" class="spinner"></span>
         <span id="ai-btn-text">✦ Auto-populate with AI</span>
       </button>
@@ -538,7 +538,7 @@
     <div id="pins-container"></div>
 
     <div class="map-popup" id="map-popup">
-      <button class="popup-close" onclick="closePopup()">✕</button>
+      <button class="popup-close" id="popup-close">✕</button>
       <div class="popup-city" id="popup-city"></div>
       <div class="popup-name" id="popup-name"></div>
       <div id="popup-rows"></div>
@@ -568,7 +568,7 @@
 // ─── SUPABASE CONFIG ──────────────────────────────────────────
 // Replace these two values with your own from supabase.com
 const SUPABASE_URL      = 'https://YOUR_PROJECT_ID.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_rGZ5vRWaaX6rY8eVEN5wmg_Vy6PzQ4L';
+const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ─── STATE ────────────────────────────────────────────────────
@@ -837,6 +837,13 @@ Return ONLY the JSON, no other text.`
 }
 
 // ─── INIT ─────────────────────────────────────────────────────
+document.getElementById('pill-interlaken').addEventListener('click', () => scrollToCity('interlaken'));
+document.getElementById('pill-montreux').addEventListener('click',   () => scrollToCity('montreux'));
+document.getElementById('pill-zurich').addEventListener('click',     () => scrollToCity('zurich'));
+document.getElementById('add-btn').addEventListener('click', addHotel);
+document.getElementById('ai-btn').addEventListener('click', aiPopulate);
+document.getElementById('popup-close').addEventListener('click', closePopup);
+
 loadHotels();
 window.addEventListener('resize', renderPins);
 </script>
