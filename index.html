@@ -827,7 +827,7 @@ async function aiPopulate() {
   try {
     const res = await fetch('https://jlkfnaicxcwpwqgyewyf.supabase.co/functions/v1/ai-populate', {
       method: 'POST',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
       },
