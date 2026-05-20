@@ -625,25 +625,50 @@ function renderCity(city) {
     list.innerHTML = `<div class="empty-city">No hotels added yet</div>`;
     return;
   }
-  list.innerHTML = cityHotels.map(h => `
-    <div class="hotel-card ${city} ${activeId === h.id ? 'active' : ''}" onclick="selectHotel('${h.id}')">
+
+  list.innerHTML = '';
+
+  cityHotels.forEach(h => {
+    const card = document.createElement('div');
+    card.className = `hotel-card ${city} ${activeId === h.id ? 'active' : ''}`;
+    card.dataset.id = h.id;
+
+    const stars    = parseInt(h.stars) || 0;
+    const noteHTML = h.note ? `<div class="hotel-note">${h.note}</div>` : '';
+
+    card.innerHTML = `
       <div class="hotel-name">
         <span>${h.name}</span>
-        <span class="stars">${'★'.repeat(parseInt(h.stars)||0)}${'☆'.repeat(5-(parseInt(h.stars)||0))}</span>
+        <span class="stars">${'★'.repeat(stars)}${'☆'.repeat(5 - stars)}</span>
       </div>
       <div class="hotel-meta">
         <span>📍 ${h.dist || '—'} to station</span>
         <span>💰 CHF ${h.price || '—'}/night</span>
       </div>
-      ${h.note ? `<div class="hotel-note">${h.note}</div>` : ''}
+      ${noteHTML}
       <div class="hotel-actions">
         <span class="status-badge ${h.status}">${h.status}</span>
-        <button class="action-btn book"   onclick="event.stopPropagation();setStatus('${h.id}','booked')">✓ Book</button>
-        <button class="action-btn reject" onclick="event.stopPropagation();setStatus('${h.id}','rejected')">✗ Pass</button>
-        <button class="action-btn delete" onclick="event.stopPropagation();deleteHotel('${h.id}')">🗑</button>
+        <button class="action-btn book"   data-id="${h.id}" data-action="book">✓ Book</button>
+        <button class="action-btn reject" data-id="${h.id}" data-action="reject">✗ Pass</button>
+        <button class="action-btn delete" data-id="${h.id}" data-action="delete">🗑</button>
       </div>
-    </div>
-  `).join('');
+    `;
+
+    card.addEventListener('click', () => selectHotel(h.id));
+
+    card.querySelectorAll('.action-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const action = btn.dataset.action;
+        const id     = btn.dataset.id;
+        if (action === 'book')   setStatus(id, 'booked');
+        if (action === 'reject') setStatus(id, 'rejected');
+        if (action === 'delete') deleteHotel(id);
+      });
+    });
+
+    list.appendChild(card);
+  });
 }
 
 function renderPins() {
