@@ -33,45 +33,43 @@
     min-height: 100vh;
   }
 
+  /* ── HEADER ── */
   header {
     background: var(--dark);
-    padding: 20px 32px;
+    padding: 16px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 3px solid var(--red);
   }
 
-  .header-left { display: flex; align-items: center; gap: 16px; }
+  .header-left { display: flex; align-items: center; gap: 12px; }
 
-  .flag {
-    font-size: 28px;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-  }
+  .flag { font-size: 24px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
 
   .header-title {
     font-family: 'Playfair Display', serif;
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     letter-spacing: 0.02em;
   }
 
   .header-sub {
     color: #9BA3B2;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 300;
     margin-top: 2px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
 
-  .header-right { display: flex; align-items: center; gap: 8px; }
+  .header-right { display: flex; align-items: center; gap: 6px; }
 
   .city-pill {
-    padding: 5px 14px;
+    padding: 5px 12px;
     border-radius: 20px;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -85,10 +83,11 @@
   .city-pill.zurich     { background: var(--zurich);     color: white; }
   .city-pill:hover { opacity: 0.85; transform: translateY(-1px); }
 
+  /* ── DESKTOP LAYOUT ── */
   .layout {
     display: grid;
     grid-template-columns: 380px 1fr;
-    height: calc(100vh - 73px);
+    height: calc(100vh - 67px);
   }
 
   .sidebar {
@@ -103,6 +102,33 @@
   .sidebar::-webkit-scrollbar-track { background: transparent; }
   .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
+  /* ── MOBILE TAB BAR ── */
+  .mobile-tabs {
+    display: none;
+    background: var(--dark);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .mobile-tab {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #9BA3B2;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .mobile-tab.active {
+    color: white;
+    border-bottom-color: var(--red);
+  }
+
+  /* ── ADD SECTION ── */
   .add-section {
     padding: 20px;
     border-bottom: 1px solid var(--border);
@@ -135,6 +161,7 @@
     background: white;
     transition: border-color 0.2s;
     outline: none;
+    -webkit-appearance: none;
   }
 
   .form-input:focus, .form-select:focus { border-color: var(--red); }
@@ -142,7 +169,7 @@
 
   .add-btn {
     width: 100%;
-    padding: 10px;
+    padding: 11px;
     background: var(--red);
     color: white;
     border: none;
@@ -160,7 +187,7 @@
 
   .ai-btn {
     width: 100%;
-    padding: 10px;
+    padding: 11px;
     background: var(--dark);
     color: white;
     border: none;
@@ -199,6 +226,7 @@
     font-style: italic;
   }
 
+  /* ── HOTEL CARDS ── */
   .city-section { border-bottom: 1px solid var(--border); }
 
   .city-header {
@@ -291,11 +319,11 @@
   .status-badge.booked      { background: #EAFAF1; color: var(--zurich); }
   .status-badge.rejected    { background: #FDEDEC; color: var(--red); }
 
-  .hotel-actions { display: flex; gap: 6px; margin-top: 8px; }
+  .hotel-actions { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
 
   .action-btn {
     font-size: 10px;
-    padding: 3px 10px;
+    padding: 4px 12px;
     border-radius: 6px;
     border: 1px solid var(--border);
     background: white;
@@ -314,6 +342,7 @@
 
   .empty-city { padding: 16px 20px; font-size: 12px; color: var(--muted); font-style: italic; }
 
+  /* ── MAP ── */
   .map-area { position: relative; background: #E8E4DC; overflow: hidden; }
 
   .swiss-map { width: 100%; height: 100%; }
@@ -324,7 +353,7 @@
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.1);
     padding: 16px 18px;
-    width: 280px;
+    width: 260px;
     z-index: 100;
     display: none;
     border-top: 3px solid var(--red);
@@ -337,13 +366,13 @@
   }
 
   .popup-city   { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin-bottom: 4px; }
-  .popup-name   { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--dark); margin-bottom: 8px; }
+  .popup-name   { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 8px; }
   .popup-row    { display: flex; justify-content: space-between; font-size: 11px; padding: 4px 0; border-bottom: 1px solid #F5F5F5; color: var(--text); }
   .popup-row:last-of-type { border-bottom: none; }
   .popup-label  { color: var(--muted); font-weight: 400; }
-  .popup-val    { font-weight: 500; text-align: right; max-width: 160px; }
+  .popup-val    { font-weight: 500; text-align: right; max-width: 150px; word-break: break-word; }
   .popup-note   { margin-top: 10px; font-size: 11px; color: var(--text); line-height: 1.6; background: #F8F6F2; padding: 8px 10px; border-radius: 6px; }
-  .popup-close  { position: absolute; top: 10px; right: 12px; background: none; border: none; font-size: 16px; cursor: pointer; color: var(--muted); line-height: 1; }
+  .popup-close  { position: absolute; top: 10px; right: 12px; background: none; border: none; font-size: 16px; cursor: pointer; color: var(--muted); line-height: 1; padding: 4px; }
 
   .map-pin { position: absolute; transform: translate(-50%, -100%); cursor: pointer; transition: transform 0.2s; z-index: 50; }
   .map-pin:hover  { transform: translate(-50%, -100%) scale(1.2); z-index: 60; }
@@ -415,6 +444,106 @@
   .summary-chip .dot { width: 8px; height: 8px; border-radius: 50%; }
 
   .route-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+
+  /* ── MOBILE STYLES ── */
+  @media (max-width: 768px) {
+
+    header {
+      padding: 12px 16px;
+    }
+
+    .header-title { font-size: 15px; }
+    .header-sub   { font-size: 10px; }
+    .flag         { font-size: 20px; }
+
+    /* Hide desktop city pills on mobile */
+    .header-right { display: none; }
+
+    /* Show mobile tab bar */
+    .mobile-tabs { display: flex; }
+
+    /* Stack layout vertically */
+    .layout {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      min-height: calc(100vh - 104px); /* header + tab bar */
+    }
+
+    /* Sidebar takes full width, hidden by default on mobile */
+    .sidebar {
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      overflow-y: visible;
+      display: none;
+    }
+
+    .sidebar.mobile-active {
+      display: flex;
+    }
+
+    /* Map takes full width */
+    .map-area {
+      width: 100%;
+      height: 55vw;
+      min-height: 240px;
+      max-height: 360px;
+      display: none;
+    }
+
+    .map-area.mobile-active {
+      display: block;
+    }
+
+    /* Make form inputs touch-friendly */
+    .form-input, .form-select {
+      font-size: 16px; /* prevents iOS zoom on focus */
+      padding: 11px 12px;
+    }
+
+    .add-btn, .ai-btn {
+      padding: 13px;
+      font-size: 14px;
+    }
+
+    /* Hotel cards larger touch targets */
+    .hotel-card { padding: 16px; }
+
+    .action-btn {
+      padding: 6px 14px;
+      font-size: 11px;
+    }
+
+    /* Popup full width on mobile */
+    .map-popup {
+      width: calc(100% - 32px);
+      left: 16px !important;
+      top: 16px !important;
+    }
+
+    /* Legend smaller on mobile */
+    .map-legend {
+      bottom: 8px;
+      right: 8px;
+      padding: 8px 10px;
+      font-size: 10px;
+    }
+
+    .summary-bar {
+      top: 8px;
+      left: 8px;
+      gap: 4px;
+    }
+
+    .summary-chip {
+      padding: 4px 8px;
+      font-size: 10px;
+    }
+
+    /* City pills in header replaced by tab bar */
+    .city-pill { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -434,9 +563,15 @@
   </div>
 </header>
 
+<!-- Mobile tab bar -->
+<div class="mobile-tabs">
+  <div class="mobile-tab active" id="tab-hotels">🏨 Hotels</div>
+  <div class="mobile-tab" id="tab-map">🗺 Map</div>
+</div>
+
 <div class="layout">
 
-  <div class="sidebar" id="sidebar">
+  <div class="sidebar mobile-active" id="sidebar">
 
     <div class="add-section">
       <h3>Add a hotel</h3>
@@ -449,10 +584,10 @@
           <option value="montreux">Montreux</option>
           <option value="zurich">Zurich</option>
         </select>
-        <input class="form-input" id="inp-stars" placeholder="Stars (e.g. 4)" type="text">
+        <input class="form-input" id="inp-stars" placeholder="Stars (e.g. 4)" type="text" inputmode="numeric">
       </div>
       <div class="form-row">
-        <input class="form-input" id="inp-price" placeholder="Price/night CHF" type="text">
+        <input class="form-input" id="inp-price" placeholder="Price/night CHF" type="text" inputmode="numeric">
         <input class="form-input" id="inp-dist"  placeholder="Dist. to station" type="text">
       </div>
       <input class="form-input full" id="inp-note" placeholder="Notes (optional)" type="text" style="margin-bottom:8px;width:100%">
@@ -569,13 +704,12 @@
 
 <script>
 // ─── SUPABASE CONFIG ──────────────────────────────────────────
-// Replace these two values with your own from supabase.com
 const SUPABASE_URL      = 'https://jlkfnaicxcwpwqgyewyf.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impsa2ZuYWljeGN3cHdxZ3lld3lmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyOTc5MDUsImV4cCI6MjA5NDg3MzkwNX0.1iUj9Op00dLQfA-Kw_fwqyeOSM5ze8VK_kjWDsBnEo0';
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ─── STATE ────────────────────────────────────────────────────
-let hotels  = [];
+let hotels   = [];
 let activeId = null;
 
 const cityConfig = {
@@ -583,6 +717,29 @@ const cityConfig = {
   montreux:   { color: '#6C3483', dates: 'Dec 7–9',  nights: 2, baseX: 20.3, baseY: 64.5, offsetX: 3, offsetY: 3 },
   zurich:     { color: '#1E8449', dates: 'Dec 9–11', nights: 2, baseX: 80.3, baseY: 27.6, offsetX: 3, offsetY: 3 }
 };
+
+// ─── MOBILE TABS ──────────────────────────────────────────────
+function isMobile() { return window.innerWidth <= 768; }
+
+function switchTab(tab) {
+  const sidebar  = document.getElementById('sidebar');
+  const mapArea  = document.getElementById('map-area');
+  const tabHotels = document.getElementById('tab-hotels');
+  const tabMap    = document.getElementById('tab-map');
+
+  if (tab === 'hotels') {
+    sidebar.classList.add('mobile-active');
+    mapArea.classList.remove('mobile-active');
+    tabHotels.classList.add('active');
+    tabMap.classList.remove('active');
+  } else {
+    mapArea.classList.add('mobile-active');
+    sidebar.classList.remove('mobile-active');
+    tabMap.classList.add('active');
+    tabHotels.classList.remove('active');
+    setTimeout(renderPins, 50); // re-render pins after map becomes visible
+  }
+}
 
 // ─── SUPABASE CRUD ────────────────────────────────────────────
 async function loadHotels() {
@@ -659,7 +816,10 @@ function renderCity(city) {
       </div>
     `;
 
-    card.addEventListener('click', () => selectHotel(h.id));
+    card.addEventListener('click', () => {
+      selectHotel(h.id);
+      if (isMobile()) switchTab('map');
+    });
 
     card.querySelectorAll('.action-btn').forEach(btn => {
       btn.addEventListener('click', e => {
@@ -749,19 +909,22 @@ function showPopup(h, x, y) {
     </div>`).join('');
 
   const noteEl = document.getElementById('popup-note');
-  noteEl.textContent  = h.note || '';
+  noteEl.textContent   = h.note || '';
   noteEl.style.display = h.note ? 'block' : 'none';
 
-  const pinX = (x / 100) * map.offsetWidth;
-  const pinY = (y / 100) * map.offsetHeight;
-  let left = pinX + 20, top = pinY - 80;
-  if (left + 280 > map.offsetWidth  - 20) left = pinX - 300;
-  if (top < 10)                           top  = pinY + 30;
-  if (top + 300 > map.offsetHeight  - 20) top  = map.offsetHeight - 320;
-  popup.style.left    = `${left}px`;
-  popup.style.top     = `${top}px`;
-  popup.style.display = 'block';
+  // On mobile popup is fixed via CSS; on desktop calculate position
+  if (!isMobile()) {
+    const pinX = (x / 100) * map.offsetWidth;
+    const pinY = (y / 100) * map.offsetHeight;
+    let left = pinX + 20, top = pinY - 80;
+    if (left + 260 > map.offsetWidth  - 20) left = pinX - 280;
+    if (top < 10)                           top  = pinY + 30;
+    if (top + 300 > map.offsetHeight  - 20) top  = map.offsetHeight - 320;
+    popup.style.left = `${left}px`;
+    popup.style.top  = `${top}px`;
+  }
 
+  popup.style.display = 'block';
   renderAll();
 }
 
@@ -796,12 +959,12 @@ async function addHotel() {
   if (!name) { alert('Please enter a hotel name'); return; }
 
   const hotel = {
-    id:     Date.now().toString(),
+    id:      Date.now().toString(),
     name,
-    city:   document.getElementById('inp-city').value,
-    stars:  document.getElementById('inp-stars').value.trim(),
-    price:  document.getElementById('inp-price').value.trim(),
-    dist:   document.getElementById('inp-dist').value.trim(),
+    city:    document.getElementById('inp-city').value,
+    stars:   document.getElementById('inp-stars').value.trim(),
+    price:   document.getElementById('inp-price').value.trim(),
+    dist:    document.getElementById('inp-dist').value.trim(),
     note:    document.getElementById('inp-note').value.trim(),
     website: document.getElementById('inp-website').value.trim(),
     status:  'considering'
@@ -851,8 +1014,8 @@ async function aiPopulate() {
     document.getElementById('inp-note').value    = parsed.note    || '';
     document.getElementById('inp-website').value = parsed.website || '';
 
-    status.textContent  = `✦ Found: ${parsed.name} — review and click Add hotel`;
-    status.style.color  = '#1E8449';
+    status.textContent = `✦ Found: ${parsed.name} — review and click Add hotel`;
+    status.style.color = '#1E8449';
   } catch (e) {
     status.textContent = 'Could not look up hotel — fill in manually';
     status.style.color = '#C0392B';
@@ -870,9 +1033,22 @@ document.getElementById('pill-zurich').addEventListener('click',     () => scrol
 document.getElementById('add-btn').addEventListener('click', addHotel);
 document.getElementById('ai-btn').addEventListener('click', aiPopulate);
 document.getElementById('popup-close').addEventListener('click', closePopup);
+document.getElementById('tab-hotels').addEventListener('click', () => switchTab('hotels'));
+document.getElementById('tab-map').addEventListener('click',    () => switchTab('map'));
+
+// On desktop, show both panels
+if (!isMobile()) {
+  document.getElementById('map-area').classList.add('mobile-active');
+}
 
 loadHotels();
-window.addEventListener('resize', renderPins);
+window.addEventListener('resize', () => {
+  if (!isMobile()) {
+    document.getElementById('sidebar').classList.add('mobile-active');
+    document.getElementById('map-area').classList.add('mobile-active');
+  }
+  renderPins();
+});
 </script>
 </body>
 </html>
