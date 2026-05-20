@@ -825,15 +825,15 @@ async function aiPopulate() {
   status.textContent    = '';
 
   try {
-    const res = await fetch('https://YOUR_PROJECT_ID.supabase.co/functions/v1/ai-populate', {
-  method: 'POST',
-  headers: { 
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-  },
-  body: JSON.stringify({ name, city })
-});
-const parsed = await res.json();
+    const res = await fetch('https://jlkfnaicxcwpwqgyewyf.supabase.co/functions/v1/ai-populate', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      },
+      body: JSON.stringify({ name, city })
+    });
+    const parsed = await res.json();
 
     document.getElementById('inp-name').value  = parsed.name  || name;
     document.getElementById('inp-stars').value = parsed.stars || '';
