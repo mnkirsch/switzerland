@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Switzerland Hotels — Dec 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C0392B;
+    --red-light: #E8534A;
+    --dark: #1A1A2E;
+    --interlaken: #1A5276;
+    --interlaken-light: #AED6F1;
+    --montreux: #6C3483;
+    --montreux-light: #D2B4DE;
+    --zurich: #1E8449;
+    --zurich-light: #A9DFBF;
+    --cream: #FAF8F5;
+    --text: #2C2C2C;
+    --muted: #7F8C8D;
+    --border: #E5E0D8;
+    --card: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dark);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--red);
+  }
+
+  .header-left { display: flex; align-items: center; gap: 16px; }
+
+  .flag {
+    font-size: 28px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .header-sub {
+    color: #9BA3B2;
+    font-size: 12px;
+    font-weight: 300;
+    margin-top: 2px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .city-pill {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1.5px solid transparent;
+  }
+
+  .city-pill.interlaken { background: var(--interlaken); color: white; }
+  .city-pill.montreux { background: var(--montreux); color: white; }
+  .city-pill.zurich { background: var(--zurich); color: white; }
+  .city-pill:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* LAYOUT */
+  .layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    height: calc(100vh - 73px);
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    background: var(--card);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* ADD HOTEL FORM */
+  .add-section {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    background: #FAFAFA;
+  }
+
+  .add-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: var(--dark);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .form-input, .form-select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--text);
+    background: white;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-input:focus, .form-select:focus {
+    border-color: var(--red);
+  }
+
+  .form-input.full { grid-column: span 2; }
+
+  .add-btn {
+    width: 100%;
+    padding: 10px;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  .add-btn:hover { background: var(--red-light); transform: translateY(-1px); }
+
+  .ai-btn {
+    width: 100%;
+    padding: 10px;
+    background: var(--dark);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .ai-btn:hover { background: #2C2C4E; }
+  .ai-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .spinner {
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    display: none;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* HOTEL CARDS */
+  .city-section { border-bottom: 1px solid var(--border); }
+
+  .city-header {
+    padding: 14px 20px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: sticky;
+    top: 0;
+    background: var(--card);
+    z-index: 10;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .city-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .city-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .city-dates {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-left: auto;
+  }
+
+  .hotel-card {
+    padding: 14px 20px;
+    border-bottom: 1px solid #F0EDE8;
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+  }
+
+  .hotel-card:hover { background: #F8F6F2; }
+  .hotel-card.active { background: #F0EDE8; }
+
+  .hotel-card.active::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .hotel-card.active.interlaken::before { background: var(--interlaken); }
+  .hotel-card.active.montreux::before { background: var(--montreux); }
+  .hotel-card.active.zurich::before { background: var(--zurich); }
+
+  .hotel-name {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--dark);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .stars { color: #F4B942; font-size: 11px; }
+
+  .hotel-meta {
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+
+  .hotel-note {
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+
+  .status-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .status-badge.considering { background: #FEF9E7; color: #D4AC0D; }
+  .status-badge.booked { background: #EAFAF1; color: var(--zurich); }
+  .status-badge.rejected { background: #FDEDEC; color: var(--red); }
+
+  .hotel-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .action-btn {
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: white;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .action-btn:hover { border-color: var(--red); color: var(--red); }
+  .action-btn.book { border-color: var(--zurich); color: var(--zurich); }
+  .action-btn.book:hover { background: var(--zurich); color: white; }
+  .action-btn.reject { border-color: #E74C3C; color: #E74C3C; }
+  .action-btn.reject:hover { background: #E74C3C; color: white; }
+  .action-btn.delete:hover { background: #E74C3C; color: white; border-color: #E74C3C; }
+
+  .empty-city {
+    padding: 16px 20px;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* MAP AREA */
+  .map-area {
+    position: relative;
+    background: #E8E4DC;
+    overflow: hidden;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  /* SVG MAP */
+  .swiss-map {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* POPUP */
+  .map-popup {
+    position: absolute;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.1);
+    padding: 16px 18px;
+    width: 280px;
+    z-index: 100;
+    display: none;
+    border-top: 3px solid var(--red);
+    animation: popIn 0.2s ease-out;
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.95) translateY(4px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .popup-city {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .popup-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+
+  .popup-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    padding: 4px 0;
+    border-bottom: 1px solid #F5F5F5;
+    color: var(--text);
+  }
+
+  .popup-row:last-of-type { border-bottom: none; }
+  .popup-label { color: var(--muted); font-weight: 400; }
+  .popup-val { font-weight: 500; text-align: right; max-width: 160px; }
+
+  .popup-note {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.6;
+    background: #F8F6F2;
+    padding: 8px 10px;
+    border-radius: 6px;
+  }
+
+  .popup-close {
+    position: absolute;
+    top: 10px; right: 12px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--muted);
+    line-height: 1;
+  }
+
+  /* MAP PINS */
+  .map-pin {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    cursor: pointer;
+    transition: transform 0.2s;
+    z-index: 50;
+  }
+
+  .map-pin:hover { transform: translate(-50%, -100%) scale(1.2); z-index: 60; }
+  .map-pin.active { transform: translate(-50%, -100%) scale(1.25); z-index: 70; }
+
+  .pin-body {
+    width: 32px; height: 32px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+    border: 2px solid white;
+  }
+
+  .pin-icon {
+    transform: rotate(45deg);
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  .pin-label {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dark);
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
+
+  .map-pin:hover .pin-label { opacity: 1; }
+
+  /* CITY MARKERS */
+  .city-marker {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .city-marker-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin: 0 auto 3px;
+    border: 2px solid white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+
+  .city-marker-name {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--dark);
+    white-space: nowrap;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+  }
+
+  /* LEGEND */
+  .map-legend {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    font-size: 11px;
+  }
+
+  .legend-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--dark);
+  }
+
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    color: var(--text);
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* SUMMARY BAR */
+  .summary-bar {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .summary-chip {
+    background: white;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 11px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .summary-chip .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  /* AI STATUS */
+  .ai-status {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    min-height: 16px;
+    font-style: italic;
+  }
+
+  /* ROUTE LINE */
+  .route-svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 5;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <span class="flag">🇨🇭</span>
+    <div>
+      <div class="header-title">Switzerland Hotels — Dec 2026</div>
+      <div class="header-sub">Group of 8 · 4 Rooms Each City · Dec 4–11</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="city-pill interlaken" onclick="scrollToCity('interlaken')">Interlaken</div>
+    <div class="city-pill montreux" onclick="scrollToCity('montreux')">Montreux</div>
+    <div class="city-pill zurich" onclick="scrollToCity('zurich')">Zurich</div>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+
+    <!-- ADD HOTEL FORM -->
+    <div class="add-section">
+      <h3>Add a hotel</h3>
+      <div class="form-row">
+        <input class="form-input full" id="inp-name" placeholder="Hotel name" type="text">
+      </div>
+      <div class="form-row">
+        <select class="form-select" id="inp-city">
+          <option value="interlaken">Interlaken</option>
+          <option value="montreux">Montreux</option>
+          <option value="zurich">Zurich</option>
+        </select>
+        <input class="form-input" id="inp-stars" placeholder="Stars (e.g. 4)" type="text">
+      </div>
+      <div class="form-row">
+        <input class="form-input" id="inp-price" placeholder="Price/night CHF" type="text">
+        <input class="form-input" id="inp-dist" placeholder="Dist. to station" type="text">
+      </div>
+      <input class="form-input full" id="inp-note" placeholder="Notes (optional)" type="text" style="margin-bottom:8px;width:100%">
+      <button class="add-btn" onclick="addHotelManual()">Add hotel</button>
+      <button class="ai-btn" id="ai-btn" onclick="aiPopulate()">
+        <span id="ai-spinner" class="spinner"></span>
+        <span id="ai-btn-text">✦ Auto-populate with AI</span>
+      </button>
+      <div class="ai-status" id="ai-status"></div>
+    </div>
+
+    <!-- INTERLAKEN -->
+    <div class="city-section" id="city-interlaken">
+      <div class="city-header">
+        <div class="city-dot" style="background:var(--interlaken)"></div>
+        <span class="city-name" style="color:var(--interlaken)">Interlaken</span>
+        <span class="city-dates">Dec 4–7 · 3 nights</span>
+      </div>
+      <div id="list-interlaken">
+        <div class="empty-city">No hotels added yet</div>
+      </div>
+    </div>
+
+    <!-- MONTREUX -->
+    <div class="city-section" id="city-montreux">
+      <div class="city-header">
+        <div class="city-dot" style="background:var(--montreux)"></div>
+        <span class="city-name" style="color:var(--montreux)">Montreux</span>
+        <span class="city-dates">Dec 7–9 · 2 nights</span>
+      </div>
+      <div id="list-montreux">
+        <div class="empty-city">No hotels added yet</div>
+      </div>
+    </div>
+
+    <!-- ZURICH -->
+    <div class="city-section" id="city-zurich">
+      <div class="city-header">
+        <div class="city-dot" style="background:var(--zurich)"></div>
+        <span class="city-name" style="color:var(--zurich)">Zurich</span>
+        <span class="city-dates">Dec 9–11 · 2 nights</span>
+      </div>
+      <div id="list-zurich">
+        <div class="empty-city">No hotels added yet</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MAP -->
+  <div class="map-area" id="map-area">
+
+    <!-- Background map texture -->
+    <svg class="swiss-map" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#D5CFBE" stroke-width="0.5" opacity="0.5"/>
+        </pattern>
+        <filter id="blur">
+          <feGaussianBlur stdDeviation="1"/>
+        </filter>
+      </defs>
+      <!-- Background -->
+      <rect width="800" height="500" fill="#E8E3D5"/>
+      <rect width="800" height="500" fill="url(#grid)"/>
+
+      <!-- Lake Geneva -->
+      <ellipse cx="210" cy="310" rx="85" ry="28" fill="#A8C8E8" opacity="0.7"/>
+      <text x="210" y="315" text-anchor="middle" font-size="9" fill="#4A7FA5" font-family="DM Sans" opacity="0.8">Lake Geneva</text>
+
+      <!-- Lake Thun -->
+      <ellipse cx="430" cy="255" rx="45" ry="14" fill="#A8C8E8" opacity="0.7"/>
+      <text x="430" y="258" text-anchor="middle" font-size="8" fill="#4A7FA5" font-family="DM Sans" opacity="0.8">L. Thun</text>
+
+      <!-- Lake Brienz -->
+      <ellipse cx="500" cy="248" rx="38" ry="12" fill="#A8C8E8" opacity="0.7"/>
+      <text x="500" y="251" text-anchor="middle" font-size="8" fill="#4A7FA5" font-family="DM Sans" opacity="0.8">L. Brienz</text>
+
+      <!-- Lake Zurich -->
+      <ellipse cx="620" cy="175" rx="35" ry="12" fill="#A8C8E8" opacity="0.7"/>
+      <text x="620" y="178" text-anchor="middle" font-size="8" fill="#4A7FA5" font-family="DM Sans" opacity="0.8">L. Zurich</text>
+
+      <!-- Alps suggestion -->
+      <path d="M 300 350 L 350 280 L 400 310 L 440 250 L 490 290 L 540 240 L 580 270 L 620 230 L 660 260 L 700 220 L 740 250 L 800 210 L 800 500 L 300 500 Z" fill="#C8BEA8" opacity="0.3"/>
+
+      <!-- Switzerland border rough -->
+      <path d="M 100 200 Q 150 150 250 140 Q 350 130 450 160 Q 550 140 650 170 Q 720 160 760 200 Q 780 240 750 300 Q 730 340 680 360 Q 620 380 550 370 Q 480 380 400 360 Q 320 380 250 360 Q 180 340 140 300 Q 110 260 100 200 Z"
+        fill="none" stroke="#A09070" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.4"/>
+
+      <!-- Country labels -->
+      <text x="130" y="170" font-size="9" fill="#8B7355" font-family="DM Sans" opacity="0.5" font-style="italic">FRANCE</text>
+      <text x="680" y="155" font-size="9" fill="#8B7355" font-family="DM Sans" opacity="0.5" font-style="italic">GERMANY</text>
+      <text x="680" y="395" font-size="9" fill="#8B7355" font-family="DM Sans" opacity="0.5" font-style="italic">ITALY</text>
+      <text x="130" y="420" font-size="9" fill="#8B7355" font-family="DM Sans" opacity="0.5" font-style="italic">FRANCE</text>
+    </svg>
+
+    <!-- Route line SVG overlay -->
+    <svg class="route-svg" viewBox="0 0 800 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Interlaken to Montreux route (Golden Pass) -->
+      <path d="M 465 248 Q 380 280 248 305" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 3" opacity="0.6"/>
+      <!-- Montreux to Zurich -->
+      <path d="M 248 305 Q 450 260 595 165" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 3" opacity="0.6"/>
+      <!-- Route labels -->
+      <text x="340" y="272" font-size="9" fill="#C0392B" font-family="DM Sans" font-weight="500" opacity="0.8" transform="rotate(-8 340 272)">Golden Pass</text>
+    </svg>
+
+    <!-- CITY MARKERS -->
+    <div class="city-marker" style="left:58.5%;top:49.6%">
+      <div class="city-marker-dot" style="background:var(--interlaken)"></div>
+      <div class="city-marker-name" style="color:var(--interlaken)">Interlaken</div>
+    </div>
+    <div class="city-marker" style="left:31%;top:61%">
+      <div class="city-marker-dot" style="background:var(--montreux)"></div>
+      <div class="city-marker-name" style="color:var(--montreux)">Montreux</div>
+    </div>
+    <div class="city-marker" style="left:74.5%;top:33%">
+      <div class="city-marker-dot" style="background:var(--zurich)"></div>
+      <div class="city-marker-name" style="color:var(--zurich)">Zurich</div>
+    </div>
+
+    <!-- HOTEL PINS CONTAINER -->
+    <div id="pins-container"></div>
+
+    <!-- POPUP -->
+    <div class="map-popup" id="map-popup">
+      <button class="popup-close" onclick="closePopup()">✕</button>
+      <div class="popup-city" id="popup-city"></div>
+      <div class="popup-name" id="popup-name"></div>
+      <div id="popup-rows"></div>
+      <div class="popup-note" id="popup-note" style="display:none"></div>
+    </div>
+
+    <!-- SUMMARY BAR -->
+    <div class="summary-bar">
+      <div class="summary-chip">
+        <div class="dot" style="background:var(--interlaken)"></div>
+        <span id="count-interlaken">0</span> Interlaken
+      </div>
+      <div class="summary-chip">
+        <div class="dot" style="background:var(--montreux)"></div>
+        <span id="count-montreux">0</span> Montreux
+      </div>
+      <div class="summary-chip">
+        <div class="dot" style="background:var(--zurich)"></div>
+        <span id="count-zurich">0</span> Zurich
+      </div>
+    </div>
+
+    <!-- LEGEND -->
+    <div class="map-legend">
+      <div class="legend-title">Dec 2026 Route</div>
+      <div class="legend-row"><div class="legend-dot" style="background:var(--interlaken)"></div>Interlaken (Dec 4–7)</div>
+      <div class="legend-row"><div class="legend-dot" style="background:var(--montreux)"></div>Montreux (Dec 7–9)</div>
+      <div class="legend-row"><div class="legend-dot" style="background:var(--zurich)"></div>Zurich (Dec 9–11)</div>
+      <div class="legend-row" style="margin-top:6px;padding-top:6px;border-top:1px solid #eee">
+        <span style="color:#C0392B;font-size:13px">- -</span> Golden Pass route
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- POPUP -->
+<script>
+// ─── DATA ───────────────────────────────────────────────────
+const hotels = [];
+let activeId = null;
+
+const cityConfig = {
+  interlaken: {
+    color: '#1A5276',
+    light: '#AED6F1',
+    dates: 'Dec 4–7',
+    nights: 3,
+    // Map position as % of map area
+    baseX: 57, baseY: 47,
+    offsetX: 3, offsetY: 3,
+    note: 'Stay near Interlaken Ost station — Höheweg preferred'
+  },
+  montreux: {
+    color: '#6C3483',
+    light: '#D2B4DE',
+    dates: 'Dec 7–9',
+    nights: 2,
+    baseX: 30, baseY: 59,
+    offsetX: 3, offsetY: 3,
+    note: 'Central lakefront / Grand Rue — avoid uphill'
+  },
+  zurich: {
+    color: '#1E8449',
+    light: '#A9DFBF',
+    dates: 'Dec 9–11',
+    nights: 2,
+    baseX: 73, baseY: 31,
+    offsetX: 3, offsetY: 3,
+    note: 'Altstadt / Bahnhofstrasse / City 1 district'
+  }
+};
+
+// ─── RENDER ─────────────────────────────────────────────────
+function renderAll() {
+  ['interlaken','montreux','zurich'].forEach(renderCity);
+  renderPins();
+  updateCounts();
+}
+
+function renderCity(city) {
+  const list = document.getElementById(`list-${city}`);
+  const cityHotels = hotels.filter(h => h.city === city);
+  if (cityHotels.length === 0) {
+    list.innerHTML = `<div class="empty-city">No hotels added yet</div>`;
+    return;
+  }
+  list.innerHTML = cityHotels.map(h => `
+    <div class="hotel-card ${city} ${activeId === h.id ? 'active' : ''}" onclick="selectHotel('${h.id}')">
+      <div class="hotel-name">
+        <span>${h.name}</span>
+        <span class="stars">${'★'.repeat(parseInt(h.stars)||0)}${'☆'.repeat(5-(parseInt(h.stars)||0))}</span>
+      </div>
+      <div class="hotel-meta">
+        <span>📍 ${h.dist || '—'} to station</span>
+        <span>💰 CHF ${h.price || '—'}/night</span>
+      </div>
+      ${h.note ? `<div class="hotel-note">${h.note}</div>` : ''}
+      <div class="hotel-actions">
+        <span class="status-badge ${h.status}">${h.status}</span>
+        <button class="action-btn book" onclick="event.stopPropagation();setStatus('${h.id}','booked')">✓ Book</button>
+        <button class="action-btn reject" onclick="event.stopPropagation();setStatus('${h.id}','rejected')">✗ Pass</button>
+        <button class="action-btn delete" onclick="event.stopPropagation();deleteHotel('${h.id}')">🗑</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderPins() {
+  const container = document.getElementById('pins-container');
+  const map = document.getElementById('map-area');
+  const mapW = map.offsetWidth;
+  const mapH = map.offsetHeight;
+
+  container.innerHTML = '';
+
+  ['interlaken','montreux','zurich'].forEach(city => {
+    const cfg = cityConfig[city];
+    const cityHotels = hotels.filter(h => h.city === city);
+
+    cityHotels.forEach((h, i) => {
+      const cols = Math.min(cityHotels.length, 3);
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      const x = cfg.baseX + (col - (cols-1)/2) * cfg.offsetX;
+      const y = cfg.baseY + row * cfg.offsetY;
+
+      const pin = document.createElement('div');
+      pin.className = `map-pin ${activeId === h.id ? 'active' : ''}`;
+      pin.style.left = `${x}%`;
+      pin.style.top = `${y}%`;
+      pin.innerHTML = `
+        <div class="pin-label">${h.name}</div>
+        <div class="pin-body" style="background:${cfg.color}">
+          <span class="pin-icon">🏨</span>
+        </div>
+      `;
+      pin.onclick = () => showPopup(h, pin, x, y);
+      container.appendChild(pin);
+    });
+  });
+}
+
+function updateCounts() {
+  ['interlaken','montreux','zurich'].forEach(city => {
+    document.getElementById(`count-${city}`).textContent =
+      hotels.filter(h => h.city === city).length;
+  });
+}
+
+// ─── INTERACTIONS ────────────────────────────────────────────
+function selectHotel(id) {
+  activeId = id;
+  const h = hotels.find(h => h.id === id);
+  if (h) {
+    const cfg = cityConfig[h.city];
+    const cityHotels = hotels.filter(x => x.city === h.city);
+    const i = cityHotels.findIndex(x => x.id === id);
+    const cols = Math.min(cityHotels.length, 3);
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+    const x = cfg.baseX + (col - (cols-1)/2) * cfg.offsetX;
+    const y = cfg.baseY + row * cfg.offsetY;
+    // Find the pin
+    const pins = document.querySelectorAll('.map-pin');
+    pins.forEach(p => {
+      if (Math.abs(parseFloat(p.style.left) - x) < 0.5) {
+        showPopup(h, p, x, y);
+      }
+    });
+  }
+  renderAll();
+}
+
+function showPopup(h, pin, x, y) {
+  activeId = h.id;
+  const cfg = cityConfig[h.city];
+  const popup = document.getElementById('map-popup');
+  const map = document.getElementById('map-area');
+
+  document.getElementById('popup-city').textContent = h.city.toUpperCase();
+  document.getElementById('popup-city').style.color = cfg.color;
+  document.getElementById('popup-name').textContent = h.name;
+
+  const rows = [
+    { label: 'Stars', val: h.stars ? '★'.repeat(parseInt(h.stars)) + ` (${h.stars}-star)` : '—' },
+    { label: 'Price/night', val: h.price ? `CHF ${h.price}` : '—' },
+    { label: 'Station', val: h.dist || '—' },
+    { label: 'Nights', val: `${cfg.nights} nights (${cfg.dates})` },
+    { label: 'Status', val: h.status.charAt(0).toUpperCase() + h.status.slice(1) },
+  ];
+
+  document.getElementById('popup-rows').innerHTML = rows.map(r => `
+    <div class="popup-row">
+      <span class="popup-label">${r.label}</span>
+      <span class="popup-val">${r.val}</span>
+    </div>
+  `).join('');
+
+  const noteEl = document.getElementById('popup-note');
+  if (h.note) {
+    noteEl.textContent = h.note;
+    noteEl.style.display = 'block';
+  } else {
+    noteEl.style.display = 'none';
+  }
+
+  popup.style.borderTopColor = cfg.color;
+  popup.style.display = 'block';
+
+  // Position popup
+  const mapRect = map.getBoundingClientRect();
+  const pinX = (x / 100) * map.offsetWidth;
+  const pinY = (y / 100) * map.offsetHeight;
+
+  let left = pinX + 20;
+  let top = pinY - 80;
+
+  if (left + 280 > map.offsetWidth - 20) left = pinX - 300;
+  if (top < 10) top = pinY + 30;
+  if (top + 300 > map.offsetHeight - 20) top = map.offsetHeight - 320;
+
+  popup.style.left = `${left}px`;
+  popup.style.top = `${top}px`;
+
+  renderAll();
+}
+
+function closePopup() {
+  document.getElementById('map-popup').style.display = 'none';
+  activeId = null;
+  renderAll();
+}
+
+function setStatus(id, status) {
+  const h = hotels.find(h => h.id === id);
+  if (h) { h.status = status; renderAll(); }
+}
+
+function deleteHotel(id) {
+  const idx = hotels.findIndex(h => h.id === id);
+  if (idx > -1) {
+    hotels.splice(idx, 1);
+    if (activeId === id) { activeId = null; closePopup(); }
+    renderAll();
+  }
+}
+
+function scrollToCity(city) {
+  document.getElementById(`city-${city}`).scrollIntoView({ behavior: 'smooth' });
+}
+
+// ─── MANUAL ADD ──────────────────────────────────────────────
+function addHotelManual() {
+  const name = document.getElementById('inp-name').value.trim();
+  const city = document.getElementById('inp-city').value;
+  const stars = document.getElementById('inp-stars').value.trim();
+  const price = document.getElementById('inp-price').value.trim();
+  const dist = document.getElementById('inp-dist').value.trim();
+  const note = document.getElementById('inp-note').value.trim();
+
+  if (!name) { alert('Please enter a hotel name'); return; }
+
+  hotels.push({
+    id: Date.now().toString(),
+    name, city, stars, price, dist, note,
+    status: 'considering'
+  });
+
+  // Clear form
+  ['inp-name','inp-stars','inp-price','inp-dist','inp-note'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+
+  renderAll();
+}
+
+// ─── AI POPULATE ─────────────────────────────────────────────
+async function aiPopulate() {
+  const name = document.getElementById('inp-name').value.trim();
+  const city = document.getElementById('inp-city').value;
+
+  if (!name) {
+    document.getElementById('ai-status').textContent = 'Enter a hotel name first';
+    return;
+  }
+
+  const btn = document.getElementById('ai-btn');
+  const spinner = document.getElementById('ai-spinner');
+  const btnText = document.getElementById('ai-btn-text');
+  const status = document.getElementById('ai-status');
+
+  btn.disabled = true;
+  spinner.style.display = 'block';
+  btnText.textContent = 'Looking up hotel...';
+  status.textContent = '';
+
+  const cityInfo = cityConfig[city];
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: `You are a Swiss travel expert. Look up the hotel "${name}" in ${city}, Switzerland and return ONLY a JSON object with these fields:
+{
+  "name": "full official hotel name",
+  "stars": "star rating as number string e.g. 4",
+  "price": "approximate price per night in CHF as number string e.g. 250",
+  "dist": "walking distance to main train station e.g. 5 min walk",
+  "note": "one sentence: key fact about this hotel relevant to a group of 8 adults visiting in December 2026 — focus on location quality, group-friendliness, or standout feature"
+}
+Return ONLY the JSON object, no other text.`
+        }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content.map(i => i.text || '').join('');
+    const clean = text.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(clean);
+
+    // Populate fields
+    document.getElementById('inp-name').value = parsed.name || name;
+    document.getElementById('inp-stars').value = parsed.stars || '';
+    document.getElementById('inp-price').value = parsed.price || '';
+    document.getElementById('inp-dist').value = parsed.dist || '';
+    document.getElementById('inp-note').value = parsed.note || '';
+
+    status.textContent = `✦ Found: ${parsed.name} — review and click Add hotel`;
+    status.style.color = '#1E8449';
+
+  } catch (err) {
+    status.textContent = 'Could not look up hotel — fill in manually';
+    status.style.color = '#C0392B';
+  } finally {
+    btn.disabled = false;
+    spinner.style.display = 'none';
+    btnText.textContent = '✦ Auto-populate with AI';
+  }
+}
+
+// ─── INIT ────────────────────────────────────────────────────
+renderAll();
+window.addEventListener('resize', renderPins);
+</script>
+</body>
+</html>
