@@ -274,6 +274,9 @@
   }
 
   .hotel-note { font-size: 11px; color: var(--text); line-height: 1.5; margin-top: 4px; }
+  .hotel-website { margin-top: 4px; font-size: 11px; }
+  .hotel-website a { color: var(--interlaken); text-decoration: none; }
+  .hotel-website a:hover { text-decoration: underline; }
 
   .status-badge {
     font-size: 10px;
@@ -453,6 +456,7 @@
         <input class="form-input" id="inp-dist"  placeholder="Dist. to station" type="text">
       </div>
       <input class="form-input full" id="inp-note" placeholder="Notes (optional)" type="text" style="margin-bottom:8px;width:100%">
+      <input class="form-input full" id="inp-website" placeholder="Website URL (optional)" type="url" style="margin-bottom:8px;width:100%">
       <button class="add-btn" id="add-btn">Add hotel</button>
       <button class="ai-btn" id="ai-btn">
         <span id="ai-spinner" class="spinner"></span>
@@ -492,7 +496,7 @@
 
   <div class="map-area" id="map-area">
 
-    <svg class="swiss-map" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+    <svg class="swiss-map" viewBox="130 60 580 380" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
           <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#D5CFBE" stroke-width="0.5" opacity="0.5"/>
@@ -510,27 +514,26 @@
       <text x="620" y="178" text-anchor="middle" font-size="8" fill="#4A7FA5" font-family="DM Sans" opacity="0.8">L. Zurich</text>
       <path d="M 300 350 L 350 280 L 400 310 L 440 250 L 490 290 L 540 240 L 580 270 L 620 230 L 660 260 L 700 220 L 740 250 L 800 210 L 800 500 L 300 500 Z" fill="#C8BEA8" opacity="0.3"/>
       <path d="M 100 200 Q 150 150 250 140 Q 350 130 450 160 Q 550 140 650 170 Q 720 160 760 200 Q 780 240 750 300 Q 730 340 680 360 Q 620 380 550 370 Q 480 380 400 360 Q 320 380 250 360 Q 180 340 140 300 Q 110 260 100 200 Z" fill="none" stroke="#A09070" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.4"/>
-      <text x="130" y="170" font-size="9" fill="#8B7355" font-family="DM Sans" opacity="0.5" font-style="italic">FRANCE</text>
+      <text x="142" y="170" font-size="9" fill="#8B7355" font-family="DM Sans" opacity="0.5" font-style="italic">FRANCE</text>
       <text x="680" y="155" font-size="9" fill="#8B7355" font-family="DM Sans" opacity="0.5" font-style="italic">GERMANY</text>
       <text x="680" y="395" font-size="9" fill="#8B7355" font-family="DM Sans" opacity="0.5" font-style="italic">ITALY</text>
-      <text x="130" y="420" font-size="9" fill="#8B7355" font-family="DM Sans" opacity="0.5" font-style="italic">FRANCE</text>
     </svg>
 
-    <svg class="route-svg" viewBox="0 0 800 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="route-svg" viewBox="130 60 580 380" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M 465 248 Q 380 280 248 305" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 3" opacity="0.6"/>
       <path d="M 248 305 Q 450 260 595 165" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 3" opacity="0.6"/>
       <text x="340" y="272" font-size="9" fill="#C0392B" font-family="DM Sans" font-weight="500" opacity="0.8" transform="rotate(-8 340 272)">Golden Pass</text>
     </svg>
 
-    <div class="city-marker" style="left:58.5%;top:49.6%">
+    <div class="city-marker" style="left:58.3%;top:49.5%">
       <div class="city-marker-dot" style="background:var(--interlaken)"></div>
       <div class="city-marker-name" style="color:var(--interlaken)">Interlaken</div>
     </div>
-    <div class="city-marker" style="left:31%;top:61%">
+    <div class="city-marker" style="left:20.3%;top:64.5%">
       <div class="city-marker-dot" style="background:var(--montreux)"></div>
       <div class="city-marker-name" style="color:var(--montreux)">Montreux</div>
     </div>
-    <div class="city-marker" style="left:74.5%;top:33%">
+    <div class="city-marker" style="left:80.3%;top:27.6%">
       <div class="city-marker-dot" style="background:var(--zurich)"></div>
       <div class="city-marker-name" style="color:var(--zurich)">Zurich</div>
     </div>
@@ -576,9 +579,9 @@ let hotels  = [];
 let activeId = null;
 
 const cityConfig = {
-  interlaken: { color: '#1A5276', dates: 'Dec 4–7',  nights: 3, baseX: 57, baseY: 47, offsetX: 3, offsetY: 3 },
-  montreux:   { color: '#6C3483', dates: 'Dec 7–9',  nights: 2, baseX: 30, baseY: 59, offsetX: 3, offsetY: 3 },
-  zurich:     { color: '#1E8449', dates: 'Dec 9–11', nights: 2, baseX: 73, baseY: 31, offsetX: 3, offsetY: 3 }
+  interlaken: { color: '#1A5276', dates: 'Dec 4–7',  nights: 3, baseX: 58.3, baseY: 49.5, offsetX: 3, offsetY: 3 },
+  montreux:   { color: '#6C3483', dates: 'Dec 7–9',  nights: 2, baseX: 20.3, baseY: 64.5, offsetX: 3, offsetY: 3 },
+  zurich:     { color: '#1E8449', dates: 'Dec 9–11', nights: 2, baseX: 80.3, baseY: 27.6, offsetX: 3, offsetY: 3 }
 };
 
 // ─── SUPABASE CRUD ────────────────────────────────────────────
@@ -633,8 +636,9 @@ function renderCity(city) {
     card.className = `hotel-card ${city} ${activeId === h.id ? 'active' : ''}`;
     card.dataset.id = h.id;
 
-    const stars    = parseInt(h.stars) || 0;
-    const noteHTML = h.note ? `<div class="hotel-note">${h.note}</div>` : '';
+    const stars       = parseInt(h.stars) || 0;
+    const noteHTML    = h.note    ? `<div class="hotel-note">${h.note}</div>` : '';
+    const websiteHTML = h.website ? `<div class="hotel-website"><a href="${h.website}" target="_blank" rel="noopener">🔗 Website</a></div>` : '';
 
     card.innerHTML = `
       <div class="hotel-name">
@@ -646,6 +650,7 @@ function renderCity(city) {
         <span>💰 CHF ${h.price || '—'}/night</span>
       </div>
       ${noteHTML}
+      ${websiteHTML}
       <div class="hotel-actions">
         <span class="status-badge ${h.status}">${h.status}</span>
         <button class="action-btn book"   data-id="${h.id}" data-action="book">✓ Book</button>
@@ -736,6 +741,7 @@ function showPopup(h, x, y) {
     { label: 'Station',    val: h.dist  || '—' },
     { label: 'Nights',     val: `${cfg.nights} nights (${cfg.dates})` },
     { label: 'Status',     val: h.status.charAt(0).toUpperCase() + h.status.slice(1) },
+    ...(h.website ? [{ label: 'Website', val: `<a href="${h.website}" target="_blank" rel="noopener" style="color:var(--interlaken)">${h.website}</a>` }] : []),
   ].map(r => `
     <div class="popup-row">
       <span class="popup-label">${r.label}</span>
@@ -796,13 +802,14 @@ async function addHotel() {
     stars:  document.getElementById('inp-stars').value.trim(),
     price:  document.getElementById('inp-price').value.trim(),
     dist:   document.getElementById('inp-dist').value.trim(),
-    note:   document.getElementById('inp-note').value.trim(),
-    status: 'considering'
+    note:    document.getElementById('inp-note').value.trim(),
+    website: document.getElementById('inp-website').value.trim(),
+    status:  'considering'
   };
 
   hotels.push(hotel);
   await saveHotel(hotel);
-  ['inp-name','inp-stars','inp-price','inp-dist','inp-note'].forEach(id => {
+  ['inp-name','inp-stars','inp-price','inp-dist','inp-note','inp-website'].forEach(id => {
     document.getElementById(id).value = '';
   });
   renderAll();
@@ -824,6 +831,8 @@ async function aiPopulate() {
   btnText.textContent   = 'Looking up hotel...';
   status.textContent    = '';
 
+  const stations = { interlaken: 'Interlaken Ost', montreux: 'Montreux station', zurich: 'Zurich HB' };
+
   try {
     const res = await fetch('https://jlkfnaicxcwpwqgyewyf.supabase.co/functions/v1/ai-populate', {
       method: 'POST',
@@ -831,15 +840,16 @@ async function aiPopulate() {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
       },
-      body: JSON.stringify({ name, city })
+      body: JSON.stringify({ name, city, station: stations[city] })
     });
     const parsed = await res.json();
 
-    document.getElementById('inp-name').value  = parsed.name  || name;
-    document.getElementById('inp-stars').value = parsed.stars || '';
-    document.getElementById('inp-price').value = parsed.price || '';
-    document.getElementById('inp-dist').value  = parsed.dist  || '';
-    document.getElementById('inp-note').value  = parsed.note  || '';
+    document.getElementById('inp-name').value    = parsed.name    || name;
+    document.getElementById('inp-stars').value   = parsed.stars   || '';
+    document.getElementById('inp-price').value   = parsed.price   || '';
+    document.getElementById('inp-dist').value    = parsed.dist    || '';
+    document.getElementById('inp-note').value    = parsed.note    || '';
+    document.getElementById('inp-website').value = parsed.website || '';
 
     status.textContent  = `✦ Found: ${parsed.name} — review and click Add hotel`;
     status.style.color  = '#1E8449';
